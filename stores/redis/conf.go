@@ -40,7 +40,6 @@ func (rc RedisConf) NewRedis() *Redis {
 	if rc.Tls {
 		opts = append(opts, WithTLS())
 	}
-
 	if rc.DB > 0 {
 		opts = append(opts, WithDB(rc.DB))
 	}
