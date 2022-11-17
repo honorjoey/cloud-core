@@ -47,7 +47,7 @@ type (
 		Addr string
 		Type string
 		Pass string
-		Db   int
+		DB   int
 		tls  bool
 		brk  breaker.Breaker
 	}
@@ -2408,6 +2408,13 @@ func WithPass(pass string) Option {
 func WithTLS() Option {
 	return func(r *Redis) {
 		r.tls = true
+	}
+}
+
+// WithDB customizes the given Redis with given db.
+func WithDB(db int) Option {
+	return func(r *Redis) {
+		r.DB = db
 	}
 }
 

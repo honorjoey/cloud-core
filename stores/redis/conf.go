@@ -16,6 +16,7 @@ type (
 	RedisConf struct {
 		Host string
 		Type string `json:",default=node,options=node|cluster"`
+		DB   int    `json:",default=0"`
 		Pass string `json:",optional"`
 		Tls  bool   `json:",optional"`
 	}
@@ -38,6 +39,10 @@ func (rc RedisConf) NewRedis() *Redis {
 	}
 	if rc.Tls {
 		opts = append(opts, WithTLS())
+	}
+
+	if rc.DB > 0 {
+		opts = append(opts, WithDB(rc.DB))
 	}
 
 	return New(rc.Host, opts...)
